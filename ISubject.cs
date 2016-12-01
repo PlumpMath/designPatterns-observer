@@ -4,7 +4,7 @@ namespace observer
     {
         void Attach(IObserver observer);
         void Detach(IObserver observer);
-        void Notify();
-        string Data { get; }
+        void AfterDoSomethingWith(string data);
+        void AfterDoMore(string completeData, string appendedData);
     }
 }

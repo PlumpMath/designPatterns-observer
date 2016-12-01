@@ -2,6 +2,7 @@ namespace observer
 {
     public interface IObserver
     {
-        void Update(ISubject sender);
+        void AfterDoSomethingWith(ISubject sender, string data);
+        void AfterDoMore(ISubject sender, string completeData, string appendedData);
     }
 }

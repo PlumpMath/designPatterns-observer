@@ -6,21 +6,33 @@ namespace observer
     class Doer : ISubject
     {
         private IList<IObserver> _observers = new List<IObserver>();
-
-        public string Data { get; private set; }
+        private string _data = string.Empty;
 
         public void DoSomethingWith(string data)
         {
-            // Console.WriteLine("Doing something with {0}.", data);
-            Data = data;
-            Notify();
+            _data = data;
+            AfterDoSomethingWith(_data);
         }
 
-        public void Notify()
+        public void DoMore(string appendData)
+        {
+            _data += appendData;
+            AfterDoMore(_data, appendData);
+        }
+
+        public void AfterDoSomethingWith(string data)
         {
             foreach (IObserver observer in _observers)
             {
-                observer.Update(this);
+                observer.AfterDoSomethingWith(this, data);
+            }
+        }
+
+        public void AfterDoMore(string completeData, string appendedData)
+        {
+            foreach (IObserver observer in _observers)
+            {
+                observer.AfterDoMore(this, completeData, appendedData);
             }
         }
 
