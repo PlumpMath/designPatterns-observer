@@ -10,26 +10,17 @@ namespace observer
         public static void Main(string[] args)
         {
             Doer doer = new Doer();
-            UserInterface ui = new UserInterface();
+
+            UserInterface userInterface = new UserInterface();
             Logger logger = new Logger();
 
-            Console.WriteLine("-----Attaching ui and logger observers-----");
-            Console.WriteLine();
+            doer.AfterDoSomethingWith += userInterface.AfterDoSomethingWith;
+            doer.AfterDoSomethingWith += logger.AfterDoSomethingWith;
 
-            doer.Attach(ui);
-            doer.Attach(logger);
+            doer.AfterDoMore += logger.AfterDoMore;
 
             doer.DoSomethingWith("my data");
             doer.DoMore("tail");
-
-            Console.WriteLine();
-            Console.WriteLine("-----Detaching ui observer-----");
-            Console.WriteLine();
-
-            doer.Detach(ui);
-            doer.DoSomethingWith("my data");
-
-            Console.ReadLine();
         }
     }
 }

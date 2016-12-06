@@ -2,15 +2,21 @@ using System;
 
 namespace observer
 {
-    public class UserInterface : IObserver
+    public class UserInterface
     {
-        public void AfterDoSomethingWith(ISubject sender, string data)
+        public readonly IObserver<string> AfterDoSomethingWith;
+
+        public UserInterface()
         {
-            Console.WriteLine("Hey user, look at {0}.", data.ToUpper());
+            this.AfterDoSomethingWith =
+                new NotificationSink<string>(
+                    (sender, data) => this.AfterDoSomethingWithHandler(sender, data)
+                );
         }
 
-        public void AfterDoMore(ISubject sender, string completeData, string appendedData)
+        private void AfterDoSomethingWithHandler(object sender, string data)
         {
+            Console.WriteLine("Hey user, look at {0}", data.ToUpper());
         }
     }
 }
