@@ -16,7 +16,6 @@ namespace observer
 
             doer.AfterDoSomethingWith += userInterface.AfterDoSomethingWith;
             doer.AfterDoSomethingWith += logger.AfterDoSomethingWith;
-
             doer.AfterDoMore += logger.AfterDoMore;
 
             doer.DoSomethingWith("my data");
